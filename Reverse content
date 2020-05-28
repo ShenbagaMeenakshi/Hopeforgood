@@ -1,0 +1,44 @@
+#include<stdio.h>
+void main()
+{     FILE *fp,*fp1,*fp2;
+      char ch;
+      int i,pos;
+      fp=fopen("input.txt","r");
+      if(fp==NULL)
+      {
+            printf("File does not exist..");
+      }
+      fseek(fp,0,SEEK_END);
+      pos=ftell(fp);
+      printf("Current postion is %d\n",pos);
+      i=0;
+      while(i<pos)
+       {
+            i++;
+            fseek(fp,-i,SEEK_END);
+            ch=fgetc(fp);
+            printf("%c",ch);
+      }
+    
+
+     if ((fp1 = fopen("File_1.txt", "r")) == NULL)
+    {
+        printf("\nFile cannot be opened.");
+        return;
+    }
+    else
+    {
+        printf("\nFile opened for copy...\n ");
+    }
+    fp2 = fopen("File_2.txt", "w");
+    fseek(fp1, 0L, SEEK_END);   
+    pos = ftell(fp1);
+    fseek(fp1, 0L, SEEK_SET);  
+    while (pos--)
+    {
+        ch = fgetc(fp1);    
+        fputc(ch, fp2);
+    }
+    fclose(fp1);
+    fclose(fp2);
+}
